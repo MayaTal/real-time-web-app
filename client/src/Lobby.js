@@ -1,4 +1,3 @@
-import "./App.css";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 import CodeBlock from "./CodeBlock";
