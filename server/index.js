@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://web-coding-server-production.up.railway.app",
+    origin: "*",
   },
 });
 
