@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://real-time-web-app.vercel.app/",
+    origin: "http://localhost:3000",
   },
 });
 
