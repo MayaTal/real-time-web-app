@@ -49,7 +49,6 @@ function Lobby() {
   const [isMentor, setIsMentor] = useState(false);
 
   const handleClick = (codeBlock) => {
-    console.log(codeBlock.title);
     setSelectedCodeBlock(codeBlock);
     socket.emit("choose_codeBlock", codeBlock.title);
     setShowCodeBlock(true);

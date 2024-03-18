@@ -19,6 +19,7 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("choose_codeBlock", (data) => {
+    // Check if the mentor for the given code block title is not already assigned.
     if (!mentors[data.title]) {
       mentors[data.title] = socket.id;
       socket.emit("mentor_status", true);
@@ -34,7 +35,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
+    console.log(`User with ID: ${socket.id} Disconnected`);
     Object.keys(mentors).forEach((key) => {
       if (mentors[key] === socket.id) {
         delete mentors[key];

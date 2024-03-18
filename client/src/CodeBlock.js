@@ -7,20 +7,16 @@ function CodeBlock({ socket, selectedCodeBlock, isMentor }) {
   const [outputCode, setOutputCode] = useState("");
   const [isCorrectSolution, setIsCorrectSolution] = useState(false);
 
-  const sendCode = async (data) => {
+  const sendCode = (data) => {
     console.log(data);
     setCurrentCode(data);
     if (data !== "") {
       const codeData = {
         title: selectedCodeBlock.title,
         message: data,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit("send_code", codeData);
+      socket.emit("send_code", codeData);
     }
   };
 
@@ -30,12 +26,11 @@ function CodeBlock({ socket, selectedCodeBlock, isMentor }) {
       selectedCodeBlock.solution.split(" ").join("")
     ) {
       setIsCorrectSolution(true);
-      console.log("great");
     }
   };
 
   useEffect(() => {
-    socket.off("receive_code").on("receive_code", (data) => {
+    socket.on("receive_code", (data) => {
       setOutputCode(data);
     });
   }, [socket]);
