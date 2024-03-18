@@ -3,7 +3,7 @@ import "./Lobby.css";
 import { useState, useEffect } from "react";
 import CodeBlock from "./CodeBlock";
 
-const socket = io.connect("web-coding-server-production.up.railway.app");
+const socket = io.connect("http://web-coding-server-production.up.railway.app");
 const codeBlocks = [
   {
     title: "Calculate the Sum of Two Numbers",
