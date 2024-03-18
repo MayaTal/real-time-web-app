@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
+import "./CodeBlock.css";
+import smiley from "./smile.png";
 
 function CodeBlock({ socket, selectedCodeBlock, isMentor }) {
   const [currentCode, setCurrentCode] = useState(selectedCodeBlock.details);
   const [outputCode, setOutputCode] = useState("");
+  const [isCorrectSolution, setIsCorrectSolution] = useState(false);
 
   const sendCode = async (data) => {
+    console.log(data);
     setCurrentCode(data);
     if (data !== "") {
       const codeData = {
@@ -18,12 +21,15 @@ function CodeBlock({ socket, selectedCodeBlock, isMentor }) {
       };
 
       await socket.emit("send_code", codeData);
-      //   setCurrentCode("");
     }
   };
 
   const sendSolution = () => {
-    if (currentCode === selectedCodeBlock.solution) {
+    if (
+      currentCode.split(" ").join("") ===
+      selectedCodeBlock.solution.split(" ").join("")
+    ) {
+      setIsCorrectSolution(true);
       console.log("great");
     }
   };
@@ -35,39 +41,40 @@ function CodeBlock({ socket, selectedCodeBlock, isMentor }) {
   }, [socket]);
 
   return (
-    <div className="code-window">
+    <div className="codeBlock">
       <div className="code-header">
-        <p>{selectedCodeBlock.title}</p>
+        <h3>{selectedCodeBlock.title}</h3>
       </div>
-      <div className="chat-body">
-        <ScrollToBottom className="message-container">
-          {!isMentor ? (
-            <div className="code">
-              <textarea
-                id="input"
-                type="text"
-                value={currentCode}
-                rows={10}
-                cols={40}
-                onChange={(event) => {
-                  sendCode(event.target.value);
-                }}
-              />
-            </div>
-          ) : (
+      <div className="code-body">
+        {!isMentor ? (
+          <div className="textarea-container">
             <textarea
               id="input"
               type="text"
-              value={outputCode}
-              rows={10}
-              cols={40}
-              readOnly={true}
+              value={currentCode}
+              onChange={(event) => {
+                sendCode(event.target.value);
+              }}
+              readOnly={isCorrectSolution}
             />
-          )}
-        </ScrollToBottom>
+            {isCorrectSolution && (
+              <img src={smiley} alt="Smiley" className="smiley" />
+            )}
+          </div>
+        ) : (
+          <textarea
+            id="input"
+            type="text"
+            placeholder={currentCode}
+            value={outputCode}
+            readOnly={true}
+          />
+        )}
       </div>
-      <div className="chat-footer">
-        <button onClick={sendSolution}>Submit code</button>
+      <div className="code-footer">
+        {!isMentor && !isCorrectSolution && (
+          <button onClick={sendSolution}>Submit code</button>
+        )}
       </div>
     </div>
   );

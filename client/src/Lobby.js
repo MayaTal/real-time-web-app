@@ -1,48 +1,49 @@
 import io from "socket.io-client";
+import "./Lobby.css";
 import { useState, useEffect } from "react";
 import CodeBlock from "./CodeBlock";
 
 const socket = io.connect("http://localhost:3001");
-
-function Lobby() {
-  const codeBlocks = [
-    {
-      title: "Calculate the Sum of Two Numbers",
-      details: `function sum(a, b) {
+const codeBlocks = [
+  {
+    title: "Calculate the Sum of Two Numbers",
+    details: `function sum(a, b) {
   // Write a function that takes two numbers as input and returns their sum.
 }`,
-      solution: `function sum(a, b) {
+    solution: `function sum(a, b) {
   return a + b;
 }`,
-    },
-    {
-      title: "Check if a String Contains a Substring",
-      details: `function containsSubstring(str, sub) {
+  },
+  {
+    title: "Check if a String Contains a Substring",
+    details: `function containsSubstring(str, sub) {
       //  Write a function that takes a string and a substring as input and returns whether the string contains the substring.
     }`,
-      solution: `function containsSubstring(str, sub) {
+    solution: `function containsSubstring(str, sub) {
             return str.includes(sub);
           }`,
-    },
-    {
-      title: "Filter Even Numbers",
-      details: `function filterEvenNumbers(arr) {
+  },
+  {
+    title: "Filter Even Numbers",
+    details: `function filterEvenNumbers(arr) {
         //   Write a function that takes an array of numbers as input and returns a new array containing only the even numbers.
       }`,
-      solution: `function filterEvenNumbers(arr) {
+    solution: `function filterEvenNumbers(arr) {
             return arr.filter(num => num % 2 === 0);
           }`,
-    },
-    {
-      title: "Check Even or Odd",
-      details: `function checkEvenOrOdd(num) {
-          //  Write a function that takes a number as input and returns a string indicating whether it is even or odd.
+  },
+  {
+    title: "Check if Even",
+    details: `function checkIfEven(num) {
+          //  Write a function that takes a number as input and returns a boolean indicating whether it is even.
         }`,
-      solution: `function checkEvenOrOdd(num) {
-            return num % 2 === 0 ? 'Even' : 'Odd';
+    solution: `function checkIfEven(num) {
+            return num % 2 === 0 ? true : false;
           }`,
-    },
-  ];
+  },
+];
+
+function Lobby() {
   const [selectedCodeBlock, setSelectedCodeBlock] = useState({});
   const [showCodeBlock, setShowCodeBlock] = useState(false);
   const [isMentor, setIsMentor] = useState(false);
@@ -64,8 +65,8 @@ function Lobby() {
     <div className="Lobby">
       {!showCodeBlock ? (
         <div className="codeBlock-container">
-          <h3>HELLO</h3>
-          <h4>Please Choose Code Block</h4>
+          <h3>Welcome</h3>
+          <h4>Choose code block</h4>
           <ul>
             {codeBlocks.map((block, index) => (
               <li key={index}>

@@ -1,0 +1,56 @@
+.codeBlock .code-header h3 {
+  height: 30px;
+  border-radius: 6px;
+  font-size: 50px;
+}
+
+.codeBlock .code-body {
+  border: 1px solid #263238;
+  background: #263238;
+  width: 100%;
+}
+
+textarea {
+  width: 900px;
+  height: 360px;
+  background: #3b3838;
+  color: #e2e2e2;
+  padding: 10px 20px;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  resize: none;
+}
+
+textarea::placeholder {
+  color: #e2e2e2;
+}
+
+.codeBlock .code-footer {
+  height: 40px;
+  margin-top: 15px;
+}
+.code-footer button {
+  height: 30px;
+  width: 200px;
+  position: relative;
+  background: #8fa5b3;
+  border: none;
+  font-size: 17px;
+  border-radius: 5px;
+  background: #125d74;
+  color: #fff;
+  cursor: pointer;
+}
+
+.code-footer button:hover {
+  background: #4996ad;
+}
+
+.smiley {
+  position: absolute;
+  top: 160px;
+  right: 250px;
+  width: 300px;
+  height: 300px;
+}
