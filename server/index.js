@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "web-coding-server-production.up.railway.app",
   },
 });
 
@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
     });
   });
 });
-
-server.listen(3001, () => {
+const port = process.env.PORT || 3001;
+server.listen(port, () => {
   console.log("SERVER RUNNING");
 });
